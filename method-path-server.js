@@ -14,9 +14,20 @@ GET/user/:id -> [{ "id": 1, "name": user_name, "email": user_email, "password": 
 //USER update profile:
 UPDATE/user/:id -> nofunciona
       -> debe recibir el tipo:
-      /*[{"key":"email", "value":"mauritoelchacarerito@hotmail.com"},
-      {"key":"name", "value":"hgjhg"},
-      {"key":"address_id", "value":1}]*/
+      [
+        {"key":"email", "value":"mauritoelchacarerito@hotmail.com"},
+        {"key":"name", "value":"Mauro"},
+        {"key":"address_id", "value":1}
+      ]
+      -> respuesta
+      [{
+        "id": 10,
+        "name": "Betito",
+        "email": "norberto@hotmail.com",
+        "password": "7110eda4d09e062aa5e4a390b0a572ac0d2c0220",
+        "address_id": 1,
+        "creation_date": "2019-03-04T13:38:41.000Z"
+      }]
 ------------------------------------------------------------------------------
 >> ANIMAL
 //NANIMAL register new.

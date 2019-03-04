@@ -87,24 +87,27 @@ fs.readFile( connectionData+".json", function (err, data) {
 
 
 
-/*
+
       //UPDATE/user/:id - UPDATE USER INFO - nofunciona - el bucle funciona pero los valores no van.
       app.put("/user/:id", function(req, res){
         var id = req.params.id;
         var new_value = req.body
 
-        for(var i= 0, l = new_value.length; i< l; i++){
-          console.log(new_value[i]);
-          console.log(new_value[i].key);
 
-          connection.query("UPDATE user SET "+new_value.key+"="+new_value.value+" WHERE id =("+id+");"
+
+        for(var i= 0; i<new_value.length; i++){
+          //console.log(new_value[i].key);
+          connection.query("UPDATE user SET "+new_value[i].key+" = '"+new_value[i].value+"' WHERE id =(10);"
             ,function (err, data) {
-              console.log(new_value[i].key)
-              return res.send(new_value[i].key);
+              //console.log(new_value[i].key.green);
           })   //UPDATE
         }  //for
+
+        connection.query("SELECT * FROM user WHERE id =("+id+");"
+          ,function (err, data) {
+              return res.send(data);
+            });//query select user by id
       }); //app.put
-*/
 
 
 
