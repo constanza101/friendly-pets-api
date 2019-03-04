@@ -9,7 +9,6 @@ METHOD/path -> (posting order) -- response type
 POST/city -> (1) -- {"id": 1,"name": "Barcelona"}
 POST/address -> (2) -- {"id":address_id, "address": new_address,"postal_code": new_PC, "city_id": new_cityID }
 POST/user -> (3) -- [{ "id": 26, "name": "Rosario", "email": "rosario@gmail.com", "password": "7110eda4d09e062aa5e4a390b0a572ac0d2c0220", "address_id": 1, "creation_date": "2019-03-04T14:43:10.000Z"}]
-
 //USER profile:
 GET/user/:id -> [{ "id": 1, "name": user_name, "email": user_email, "password": user_pass, "address_id": 1, "creation_date": "2019-02-26T15:48:48.000Z"}]
 //USER update profile:
