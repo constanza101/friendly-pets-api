@@ -1,7 +1,9 @@
 "This document is a guide/index of api/server.js"
 *************************************************************
 "READ LIKE:"
-METHOD/path -> (posting order) -- response type
+METHOD/path -> (posting order) -->
+
+ response type
 (if value = 1 -> value_type: number)
 *************************************************************
 >> USER
@@ -12,14 +14,14 @@ POST/user -> (3) -- [{ "id": 26, "name": "Rosario", "email": "rosario@gmail.com"
 //USER profile:
 GET/user/:id -> [{ "id": 1, "name": user_name, "email": user_email, "password": user_pass, "address_id": 1, "creation_date": "2019-02-26T15:48:48.000Z"}]
 //USER update profile:
-UPDATE/user/:id -> nofunciona
-      -> debe recibir el tipo:
+UPDATE/user/:id
+      -> req.body:
       [
         {"key":"email", "value":"mauritoelchacarerito@hotmail.com"},
         {"key":"name", "value":"Mauro"},
         {"key":"address_id", "value":1}
       ]
-      -> respuesta
+      -> res.send():
       [{
         "id": 10,
         "name": "Betito",
@@ -28,6 +30,20 @@ UPDATE/user/:id -> nofunciona
         "address_id": 1,
         "creation_date": "2019-03-04T13:38:41.000Z"
       }]
+
+DELETE/user/:id -> res.send(data) :
+                            {
+                            "fieldCount": 0,
+                            "affectedRows": 1,
+                            "insertId": 0,
+                            "serverStatus": 2,
+                            "warningCount": 0,
+                            "message": "",
+                            "protocol41": true,
+                            "changedRows": 0
+                            }
+
+
 ------------------------------------------------------------------------------
 >> ANIMAL
 //NANIMAL register new.

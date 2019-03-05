@@ -85,15 +85,10 @@ fs.readFile( connectionData+".json", function (err, data) {
       });
 
 
-
-
-
       //UPDATE/user/:id - UPDATE USER INFO - nofunciona - el bucle funciona pero los valores no van.
       app.put("/user/:id", function(req, res){
         var id = req.params.id;
         var new_value = req.body
-
-
 
         for(var i= 0; i<new_value.length; i++){
           //console.log(new_value[i].key);
@@ -109,6 +104,15 @@ fs.readFile( connectionData+".json", function (err, data) {
             });//query select user by id
       }); //app.put
 
+
+      //DELETE/user/:id
+      app.delete("/user/:id", function(req, res){
+        var id = req.params.id;
+        connection.query("DELETE FROM user WHERE id =("+id+");"
+          ,function (err, data) {
+              return res.send(data);
+            });
+        });
 
 
 //POST/animal  nofunciona: birthdate.por ahora poniendo null puedo cargar todo lo demas pero no puedo dar con el formato de la fecha.
