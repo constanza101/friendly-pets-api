@@ -148,10 +148,6 @@ app.post("/animal", function(req, res){
   var found_date = new Date(req.body.found_date);
   var found_address_id = req.body.found_address_id;
 
-/*
-  console.log("INSERT INTO animal (owner_user_id, name, animal_type_id, birthdate, gender, size, picture, description) VALUES("
-              +owner_user_id+",'"+name+"',"+animal_type_id+","+birthdate+",'"+gender+"','"+size+"','"+picture+"','"+description+"');");
-*/
   connection.query("INSERT INTO animal (owner_user_id, name, animal_type_id, birthdate, gender, size, picture, description) VALUES("
               +owner_user_id+",'"+name+"',"+animal_type_id+","+connection.escape(birthdate)+",'"+gender+"','"+size+"','"+picture+"','"+description+"');"
         ,function (err, result) {
@@ -161,12 +157,21 @@ app.post("/animal", function(req, res){
         new_record['id'] = result.insertId;
         return res.send(new_record);
           });
-
-
 });
 
 
-//GET//animals/:owner_user_id - GET owner_user_id from animal.
+//GET/animalById/:id - GET animal according its id
+    app.get("/animal/:id", function(req, res){
+      var id = req.params.id;
+      console.log("SELECT * FROM animal WHERE id =("+id+");");
+     connection.query("SELECT * FROM animal WHERE id =("+id+");"
+            ,function (err, data) {
+              if(err) throw err;
+              return res.send(data)
+              });
+      });
+
+//GET/animals/:owner_user_id - GET owner_user_id from animal.
 app.get("/animals/:owner_user_id", function(req, res){
   var owner_user_id = req.params.owner_user_id;
 
@@ -177,8 +182,20 @@ app.get("/animals/:owner_user_id", function(req, res){
           //console.log(data);
           return res.send(data)
           });
-
   });
+
+
+//GET/animalsByStatus/:status - GET list of animals according its status: (found, lost, adoption)
+  app.get("/animalsByStatus/:status", function(req, res){
+    var status = req.params.status;
+   connection.query("SELECT * FROM animal WHERE status =('"+status+"');"
+          ,function (err, data) {
+            if(err) throw err;
+            return res.send(data)
+            });
+    });
+
+
 
   //UPDATE/animal/:id
   app.put("/animal/:id", function(req, res){
@@ -186,21 +203,25 @@ app.get("/animals/:owner_user_id", function(req, res){
     var new_value = req.body
 
     for(var i= 0; i<new_value.length; i++){
-      //console.log(new_value[i].key);
-      connection.query("UPDATE animal SET "+new_value[i].key+" = '"+new_value[i].value+"' WHERE id =("+id+");"
+      connection.query("UPDATE animal SET "+new_value[i]['key']+" = '"+new_value[i]['value']+"' WHERE id =("+id+");"
         ,function (err, data) {
           if(err) throw err;
-          //console.log(new_value[i].key.green);
+          res.send("actualizado");
       })   //UPDATE
     }  //for
-
-    connection.query("SELECT * FROM user WHERE id =("+id+");"
-      ,function (err, data) {
-        if(err) throw err;
-          return res.send(data);
-        });//query select user by id
   }); //app.put
 
+
+//GET/animalById/:id - GET animal according its id
+  app.delete("/animal/:id", function(req, res){
+    var id = req.params.id;
+    console.log("DELETE FROM animal WHERE id =("+id+");");
+   connection.query("DELETE FROM animal WHERE id =("+id+");"
+          ,function (err, data) {
+            if(err) throw err;
+            return res.send("eliminado")
+            });
+    });
 
 
 

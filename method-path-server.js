@@ -87,7 +87,9 @@ POST/animal
         "id": 1
       }
 
-
+GET/animal/:id
+        ->returns all details of one animal: [{}]
+        [{ "id": 2, "name": "Alfredo", "animal_type_id": 2, "birthdate": "2015-02-01T23:00:00.000Z", "gender": "M", "size": "small", "picture": null, "status": "default", "description": "Alfredo esta loquito de amor", "creation_date": "2019-02-26T15:56:03.000Z", "lost_date": null, "lost_address_id": null, "found_date": null, "found_address_id": null, "owner_user_id": 2, "animal_breed_id": 2},]
 GET/animals/:owner_user_id --> (returns all the pets of one user) -> [{},{}]
 [
 { "id": 2, "name": "Alfredo", "animal_type_id": 2, "birthdate": "2015-02-01T23:00:00.000Z", "gender": "M", "size": "small", "picture": null, "status": "default", "description": "Alfredo esta loquito de amor", "creation_date": "2019-02-26T15:56:03.000Z", "lost_date": null, "lost_address_id": null, "found_date": null, "found_address_id": null, "owner_user_id": 2, "animal_breed_id": 2},
@@ -95,16 +97,26 @@ GET/animals/:owner_user_id --> (returns all the pets of one user) -> [{},{}]
 ]
 
 
-TODO: continuar haciendo el update para animal. Poner un IF, para que cuando key sea "lost_date o found_date", que value sea new Date().:
 UPDATE/animal/:id
-        FOR ANIMAL LOST:
               POST/city -> (1) -- {"id": 1,"name": "Barcelona"}
               POST/address -> (2) -- {"id":address_id, "address": new_address,"postal_code": new_PC, "city_id": new_cityID }
               -> (3)receives_req.body:
               [
-                {"key":"lost_date", "value": date},
-                {"key":"lost_address_id", "value":1},
+  	           {"key":"status", "value":"lost"},
+               {"key":"picture", "value":"url2"},
+               {"key":"lost_address_id", "value":1},
+               {"key":"lost_date", "value": "2018-12-31"}
               ]
+              ->returns "actualizado"
+
+GET/animalsByStatus/:status
+          status:lost/found/adption;
+          ->returns all animalsByStatus: [{},{},{}]
+
+DELETE/animal/:id
+
+
+
 
 
 
