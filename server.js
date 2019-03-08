@@ -121,15 +121,8 @@ fs.readFile( connectionData+".json", function (err, data) {
         });
 
 
-//POST/animal  nofunciona: birthdate.por ahora poniendo null puedo cargar todo lo demas pero no puedo dar con el formato de la fecha.
-
-//POST  - owner_user_id id, name, animal_type_id, birthdate, gender, size, picture, description, creation_date, status
-//update for adoption: just change: status = adoption
-//update to lost: status=lost, lost_date, lost_address_id,
-//update to found: status=found, found_date, found_address_id, owner_user_id, animal_breed_id
-
 app.post("/animal", function(req, res){
-  var new_animal_id = data.insertId // se agrega solo al registrar el animal
+//  var new_animal_id = data.insertId // se agrega solo al registrar el animal
   var owner_user_id = req.body.owner_user_id;
   var name = req.body.name;
   var animal_type_id = req.body.animal_type_id;
@@ -152,11 +145,30 @@ app.post("/animal", function(req, res){
               +owner_user_id+",'"+name+"',"+animal_type_id+","+connection.escape(birthdate)+",'"+gender+"','"+size+"','"+picture+"','"+description+"');"
         ,function (err, result) {
           if (err) throw err;
+          var new_animal_id = result.insertId;
         console.log(result.insertId);
-        var new_record = req.body;
-        new_record['id'] = result.insertId;
-        return res.send(new_record);
-          });
+        console.log("INSERT INTO log_animal_user (animal_id, user_id) VALUES("
+                                                      +new_animal_id+","+owner_user_id+");" );
+        connection.query("INSERT INTO log_animal_user (animal_id, user_id) VALUES("
+                                                        +new_animal_id+","+owner_user_id+");"
+              ,function (err, result) {
+                if (err) throw err;
+              console.log(result.insertId);
+              var new_record = req.body;
+              new_record['id'] = result.insertId;
+              return res.send(new_record);
+            });
+
+            var new_record = req.body;
+            new_record['id'] = result.insertId;
+            return res.send(new_record);
+
+      });
+
+
+
+
+
 });
 
 
