@@ -89,3 +89,106 @@ Saves and returns all data of a single user.(address_id of the address of the us
       });
     }
     ```
+
+    ***
+
+**Update User (update profile)**
+----
+ Returns all new data of a single user.
+
+* **URL**
+
+  /user/:id
+
+* **Method:**
+
+  `PUT`
+
+*  **URL Params** **(Required)**
+
+* **Data Params**
+
+  ```
+  [{"key":"email", "value":"hola@hotmail.com"},
+    {"key":"name", "value":"Jose"},
+    {"key":"address_id", "value":1}]
+  ```
+
+  `key = [string]` -> must be exactly the key of what will be updated. <br>
+  `value` ->  type according to the key:<br>
+    if key = name : `value =[string]`<br>
+    if key = email :`value =[string]`<br>
+    if key = password : `password=[string]`<br>
+    if key = address_id : `value =[integer]`
+
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:**
+
+    `[{"id": 1,"name": "Jose",  "email": "hola@hotmail.com",  "password": "7110eda4d09e062aa5e4a390b0a572ac0d2c0220",  "address_id": 1,  "creation_date": "2019-03-04T13:38:41.000Z"}]`
+
+* **Error Response:** N/A
+
+
+* **Sample Call:**
+
+  ```javascript
+  function updateUserDetails(){
+
+      var url = "http://localhost:8000/user/10"
+      var data = [{"key":"email",     "value":"betito@hotmail.com"},
+        {"key":"name", "value":"Betito"},
+        {"key":"address_id", "value":1}]
+
+      return $.ajax({
+      url: url,
+      type: 'PUT',
+      success: function(response) {console.log(response);},
+      data: JSON.stringify(data),
+      contentType: "application/json"
+      });
+  }
+  ```
+
+  ***
+
+**DELETE User (update profile)**
+----
+Returns all new data of a single user.
+
+* **URL**
+
+/user/:id
+
+* **Method:**
+
+`DELETE`
+
+*  **URL Params** **(Required)**
+
+`id=[integer]`
+
+* **Data Params**: N/A
+
+* **Success Response:**
+
+* **Code:** 200 <br />
+  **Content:** N/A
+
+* **Error Response:** N/A
+
+
+* **Sample Call:**
+
+```javascript
+function deleteUser(){
+    var url = "http://localhost:8000/user/11"
+    return $.ajax({
+    url: url,
+    type: 'DELETE',
+    success: function(response) {console.log("user deleted from database");},
+    });
+}
+```

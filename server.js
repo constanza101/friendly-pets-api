@@ -20,6 +20,12 @@ fs.readFile( connectionData+".json", function (err, data) {
   //configuro el server para que parsee el body de las peticiones post
   app.use(express.json());
   app.use(express.urlencoded());
+  app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE');
+    next();
+  });
 
 
   //POST/city
@@ -111,15 +117,16 @@ fs.readFile( connectionData+".json", function (err, data) {
       }); //app.put
 
 
-      //DELETE/user/:id
-      app.delete("/user/:id", function(req, res){
-        var id = req.params.id;
-        connection.query("DELETE FROM user WHERE id =("+id+");"
-          ,function (err, data) {
-            if(err) throw err;
-              return res.send(data);
-            });
-        });
+//DELETE/user/:id
+//TODO: From user/:id, GET the addres_id and then: DELETE FROM address WHERE id = address_id
+app.delete("/user/:id", function(req, res){
+  var id = req.params.id;
+  connection.query("DELETE FROM user WHERE id =("+id+");"
+    ,function (err, data) {
+      if(err) throw err;
+        return res.send("user deleted");
+      });
+  });
 
 
 app.post("/animal", function(req, res){
