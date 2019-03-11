@@ -46,7 +46,6 @@ Saves and returns all data of a single user.(address_id of the address of the us
 }
   ```
 
-***
 
 **Show User (user profile)**
 ----
@@ -89,8 +88,6 @@ function getUserDetails(){
   });
 }
 ```
-
-***
 
 **Update User (update profile)**
 ----
