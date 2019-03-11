@@ -40,12 +40,11 @@ Saves and returns all data of a single user.(address_id of the address of the us
   var data = {"name":"Claudia","email":"clau@gmail.com","password":"1234", "address_id": 1};
   var url = "http://localhost:8000/user"
 
-  $.post(url, data, function(response) {
-      console.log(response);
-  });
-}
-  ```
-
+    $.post(url, data, function(response) {
+        console.log(response);
+    });
+  }
+```
 
 **Show User (user profile)**
 ----
