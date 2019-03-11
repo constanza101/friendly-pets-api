@@ -3,8 +3,8 @@
 "READ LIKE:"
 METHOD/path -> (posting order) -->
 
- response type
-(if value = 1 -> value_type: number)
+-> response type
+-(if value = 1 -> value_type: number)
 *************************************************************
 >> USER
 //signup:
@@ -62,7 +62,7 @@ status = default
 //status changes --> updates
 >> ADOPTION :
 new_status = adoption
-care = quiet/energetic/special care
+//care = quiet/energetic/special care
 >> LOST :
 new_status = lost
 lost_address_id >> id
