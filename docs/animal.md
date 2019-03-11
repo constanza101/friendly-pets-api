@@ -7,7 +7,7 @@
 </a>
 
 
-**Save New User (sign up)**
+**Save New Animal**
 ----
 Saves and returns all data of a single animal.(owner_id must come from an existing User, who is the one to register the new animal).
 
@@ -29,8 +29,8 @@ Saves and returns all data of a single animal.(owner_id must come from an existi
         "name": "Frida",
         "animal_type_id"
         "birthdate": "1999-12-31",
-        "gender": "F",// F = female; M = male
-        "size": "medium", //small, medium, large, extralarge
+        "gender": "F",
+        "size": "medium",
         "picture": "url",
         "description": "es una gatita bebe"
       }
@@ -71,8 +71,8 @@ Saves and returns all data of a single animal.(owner_id must come from an existi
     "name": "Frida",
     "animal_type_id": 1,
     "birthdate": "1999-12-31",
-    "gender": "F",// F = female; M = male
-    "size": "medium", //small, medium, large, extralarge
+    "gender": "F",
+    "size": "medium",
     "picture": "url.jpg",
     "description": "es una gatita bebe"
   };
@@ -109,7 +109,23 @@ Returns all data of a single animal.
   * **Code:** 200 <br />
   * **Content:**
 
-    `[{ "id": 2, "name": "Alfredo", "animal_type_id": 2, "birthdate": "2015-02-01T23:00:00.000Z", "gender": "M", "size": "small", "picture": null, "status": "default", "description": "Alfredo esta loquito de amor", "creation_date": "2019-02-26T15:56:03.000Z", "lost_date": null, "lost_address_id": null, "found_date": null, "found_address_id": null, "owner_user_id": 2, "animal_breed_id": 2},]`
+    `[{
+      "id": 2,
+      "name": "Alfredo",
+      "animal_type_id": 2,
+      "birthdate": "2015-02-01T23:00:00.000Z",
+      "gender": "M",
+      "size": "small",
+      "picture": null,
+      "status": "default",
+      "description": "Alfredo esta loquito",
+      "creation_date": "2019-02-26T15:56:03.000Z",
+      "lost_date": null,
+      "lost_address_id": null,
+      "found_date": null,
+      "found_address_id": null,
+      "owner_user_id": 2,
+      "animal_breed_id": 2},]`
 
 * **Error Response:** N/A
 
@@ -118,7 +134,7 @@ Returns all data of a single animal.
 
 ```javascript
 function getAnimalDetails(){
-  var url = "localhost:8000/animal/1"
+  var url = "http://localhost:8000/animal/1"
   $.get(url, function(response) {
       console.log(response);
   });
@@ -127,7 +143,7 @@ function getAnimalDetails(){
 
 **Update User (update profile)**
 ----
- Returns all new data of a single user.
+ Returns all new data of a single animal.
 
 * **URL**
 
@@ -158,7 +174,7 @@ function getAnimalDetails(){
 * **Success Response:**
 
   * **Code:** 200 <br />
-    **Content:**
+  * **Content:**
 
     `[{"id": 1,"name": "Jose",  "email": "hola@hotmail.com",  "password": "7110eda4d09e062aa5e4a390b0a572ac0d2c0220",  "address_id": 1,  "creation_date": "2019-03-04T13:38:41.000Z"}]`
 

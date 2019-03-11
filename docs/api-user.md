@@ -78,7 +78,7 @@ Returns all data of a single user.
 * **Success Response:**
 
 * **Code:** 200 <br />
-  **Content:**
+* **Content:**
 
   `[{ "id": 1, "name": user_name, "email": user_email, "password": user_pass, "address_id": 1, "creation_date": "2019-02-26T15:48:48.000Z"}]`
 
@@ -90,7 +90,7 @@ Returns all data of a single user.
 ```javascript
 function getUserDetails(){
 
-  var url = "localhost:8000/user/1"
+  var url = "http://localhost:8000/user/1"
   $.get(url, function(response) {
       console.log(response);
   });
@@ -130,7 +130,7 @@ function getUserDetails(){
 * **Success Response:**
 
   * **Code:** 200 <br />
-    **Content:**
+  * **Content:**
 
     `[{"id": 1,"name": "Jose",  "email": "hola@hotmail.com",  "password": "7110eda4d09e062aa5e4a390b0a572ac0d2c0220",  "address_id": 1,  "creation_date": "2019-03-04T13:38:41.000Z"}]`
 
@@ -178,7 +178,7 @@ Returns all new data of a single user.
 * **Success Response:**
 
 * **Code:** 200 <br />
-  **Content:** N/A
+* **Content:** N/A
 
 * **Error Response:** N/A
 

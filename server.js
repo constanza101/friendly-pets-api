@@ -172,7 +172,6 @@ app.post("/animal", function(req, res){
 //GET/animalById/:id - GET animal according its id
     app.get("/animal/:id", function(req, res){
       var id = req.params.id;
-      console.log("SELECT * FROM animal WHERE id =("+id+");");
      connection.query("SELECT * FROM animal WHERE id =("+id+");"
             ,function (err, data) {
               if(err) throw err;
