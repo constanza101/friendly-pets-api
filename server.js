@@ -183,7 +183,7 @@ app.post("/animal", function(req, res){
 app.get("/animals/:owner_user_id", function(req, res){
   var owner_user_id = req.params.owner_user_id;
 
-  connection.query("SELECT * FROM animal WHERE owner_user_id =("+owner_user_id+");"
+  connection.query("SELECT name, gender, picture, status, description, size FROM animal WHERE owner_user_id =("+owner_user_id+");"
         ,function (err, data) {
           if(err) throw err;
 

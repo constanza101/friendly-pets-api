@@ -141,6 +141,62 @@ function getAnimalDetails(){
 }
 ```
 
+
+**List all animals of one owner**
+----
+Returns all the pets of one user, by the owner_user_id.
+
+* **URL**
+
+  /animals/:owner_user_id
+
+* **Method:**
+
+  `GET`
+
+*  **URL Params** **(Required)**
+
+  `owner_user_id =[integer]`
+
+* **Data Params**
+
+  None
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+  * **Content:**
+
+```
+    [
+    { "name": "Alfredo", "gender": "M", "size": "large", "picture": null, "status": "default", "description": "Alfredo esta loquito"},
+    { "name": "Calu", "gender": "F", "size": "large", "picture": "www.google.com", "status": "default", "description": "es una gatita bebe"}
+    ]
+```
+
+* **Error Response:** N/A
+
+
+* **Sample Call:**
+
+```javascript
+function getAnimalsByOwnerId(){
+  var url = "http://localhost:8000/animals/1"
+  $.get(url, function(response) {
+      console.log(response);
+  });
+}
+```
+
+
+
+
+
+
+
+
+
+
 **Update User (update profile)**
 ----
  Returns all new data of a single animal.

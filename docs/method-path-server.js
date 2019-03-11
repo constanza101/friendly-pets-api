@@ -92,10 +92,12 @@ POST/animal
 GET/animal/:id
         ->returns all details of one animal: [{}]
         [{ "id": 2, "name": "Alfredo", "animal_type_id": 2, "birthdate": "2015-02-01T23:00:00.000Z", "gender": "M", "size": "small", "picture": null, "status": "default", "description": "Alfredo esta loquito de amor", "creation_date": "2019-02-26T15:56:03.000Z", "lost_date": null, "lost_address_id": null, "found_date": null, "found_address_id": null, "owner_user_id": 2, "animal_breed_id": 2},]
+
 GET/animals/:owner_user_id --> (returns all the pets of one user) -> [{},{}]
+   -> returns only: name, gender, picture, status, description, size
 [
-{ "id": 2, "name": "Alfredo", "animal_type_id": 2, "birthdate": "2015-02-01T23:00:00.000Z", "gender": "M", "size": "small", "picture": null, "status": "default", "description": "Alfredo esta loquito de amor", "creation_date": "2019-02-26T15:56:03.000Z", "lost_date": null, "lost_address_id": null, "found_date": null, "found_address_id": null, "owner_user_id": 2, "animal_breed_id": 2},
-{ "id": 21, "name": "Calu", "animal_type_id": 1, "birthdate": null, "gender": "F", "size": "large", "picture": "www.google.com", "status": "default", "description": "es una gatita bebe", "creation_date": "2019-03-03T16:55:49.000Z", "lost_date": null, "lost_address_id": null, "found_date": null, "found_address_id": null, "owner_user_id": 2, "animal_breed_id": null}
+{ "name": "Alfredo", "gender": "M", "size": "large", "picture": null, "status": "default", "description": "Alfredo esta loquito"},
+{ "name": "Calu", "gender": "F", "size": "large", "picture": "www.google.com", "status": "default", "description": "es una gatita bebe"}
 ]
 
 
