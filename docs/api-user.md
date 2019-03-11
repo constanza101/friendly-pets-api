@@ -1,3 +1,12 @@
+**Index:**
+===
+  * <a href="https://github.com/constanza101/friendly-pets-api/blob/master/docs/api-user.md#save-new-user-sign-up">Save New User (sign up)</a>
+  * <a href="https://github.com/constanza101/friendly-pets-api/blob/master/docs/api-user.md#show-user-user-profile">Show User (user profile)</a>
+  * <a href="https://github.com/constanza101/friendly-pets-api/blob/master/docs/api-user.md#update-user-update-profile">Update User (update profile)</a>
+  * <a href="https://github.com/constanza101/friendly-pets-api/blob/master/docs/api-user.md#delete-user-update-profile">Delete User (update profile)
+</a>
+
+
 **Save New User (sign up)**
 ----
 Saves and returns all data of a single user.(address_id of the address of the user is needed to make this POST call, to generate an address_id you need to make a post call to address endpoint before. Check the section of address calls)
@@ -148,7 +157,7 @@ function getUserDetails(){
   }
   ```
 
-**DELETE User (update profile)**
+**Delete User (update profile)**
 ----
 Returns all new data of a single user.
 

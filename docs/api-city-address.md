@@ -1,7 +1,7 @@
 **Index:**
 ===
   * <a href="https://github.com/constanza101/friendly-pets-api/blob/master/docs/api-city-address.md#save-city">Save City</a>
-  * user:  <a href="api-user.md">/api-user.md</a>
+  * <a href="https://github.com/constanza101/friendly-pets-api/blob/master/docs/api-city-address.md#save-address">Save Address</a>
 
 
 **Save City**
