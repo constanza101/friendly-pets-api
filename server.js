@@ -53,6 +53,7 @@ fs.readFile( connectionData+".json", function (err, data) {
           +"'"+new_address+"','"+new_PC+"',"+new_cityID+");"
       ,function (err, data) {
           if(err) throw err;
+          console.log({"id":data.insertId, "address": new_address,"postal_code": new_PC, "city_id": new_cityID});
           return res.send({"id":data.insertId, "address": new_address,"postal_code": new_PC, "city_id": new_cityID});
         });
     });
