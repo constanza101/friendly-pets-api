@@ -1,3 +1,8 @@
+**Index:**
+===
+  * <a href="https://github.com/constanza101/friendly-pets-api/blob/master/docs/api-city-address.md#save-city">Save City</a>
+  * user:  <a href="api-user.md">/api-user.md</a>
+
 
 **Save City**
 ----
@@ -34,7 +39,7 @@ Saves and returns the saved city name and and city_id.
 
 * **Sample Call:**
 
-  ```javascript
+```javascript
   function saveCity(){
   var data = {"name": "Barcelona"};
   var url = "http://localhost:8000/city"
@@ -43,7 +48,7 @@ Saves and returns the saved city name and and city_id.
       console.log(response);
   });
 }
-  ```
+```
 
   **Save address**
   ----
