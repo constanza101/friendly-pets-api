@@ -26,7 +26,7 @@ Saves and returns all data of a single user.(address_id of the address of the us
 * **Success Response:**
 
   * **Code:** 200 <br />
-    **Content:**
+  * **Content:**
 
     `[{ "id": 1, "name": user_name, "email": user_email, "password": user_pass, "address_id": 1, "creation_date": "2019-02-26T15:48:48.000Z"}]`
 
@@ -147,8 +147,6 @@ function getUserDetails(){
       });
   }
   ```
-
-  ***
 
 **DELETE User (update profile)**
 ----
