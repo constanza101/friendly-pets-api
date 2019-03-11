@@ -48,49 +48,49 @@ Saves and returns all data of a single user.(address_id of the address of the us
 
 ***
 
-  **Show User (user profile)**
-  ----
-   Returns all data of a single user.
+**Show User (user profile)**
+----
+Returns all data of a single user.
 
-  * **URL**
+* **URL**
 
-    /user/:id
+  /user/:id
 
-  * **Method:**
+* **Method:**
 
-    `GET`
+  `GET`
 
-  *  **URL Params** **(Required)**
+*  **URL Params** **(Required)**
 
-    `id=[integer]`
+  `id=[integer]`
 
-  * **Data Params**
+* **Data Params**
 
-    None
+  None
 
-  * **Success Response:**
+* **Success Response:**
 
-    * **Code:** 200 <br />
-      **Content:**
+* **Code:** 200 <br />
+  **Content:**
 
-      `[{ "id": 1, "name": user_name, "email": user_email, "password": user_pass, "address_id": 1, "creation_date": "2019-02-26T15:48:48.000Z"}]`
+  `[{ "id": 1, "name": user_name, "email": user_email, "password": user_pass, "address_id": 1, "creation_date": "2019-02-26T15:48:48.000Z"}]`
 
-  * **Error Response:** N/A
+* **Error Response:** N/A
 
 
-  * **Sample Call:**
+* **Sample Call:**
 
-    ```javascript
-    function getUserDetails(){
+```javascript
+function getUserDetails(){
 
-      var url = "localhost:8000/user/1"
-      $.get(url, function(response) {
-          console.log(response);
-      });
-    }
-    ```
+  var url = "localhost:8000/user/1"
+  $.get(url, function(response) {
+      console.log(response);
+  });
+}
+```
 
-    ***
+***
 
 **Update User (update profile)**
 ----
