@@ -90,7 +90,7 @@ Saves and returns the saved city name and and city_id.
 
   * **Sample Call:**
 
-    ```javascript
+```javascript
     function saveAddress(){
     var data = {"address": "Tramuntana 64", "postal_code": "08860", "city_id": 1};
     var url = "http://localhost:8000/address"
@@ -99,4 +99,4 @@ Saves and returns the saved city name and and city_id.
         console.log(response);
     });
   }
-    ```
+```

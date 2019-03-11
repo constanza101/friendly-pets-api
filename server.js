@@ -154,29 +154,18 @@ app.post("/animal", function(req, res){
         ,function (err, result) {
           if (err) throw err;
           var new_animal_id = result.insertId;
-        console.log(result.insertId);
-        console.log("INSERT INTO log_animal_user (animal_id, user_id) VALUES("
-                                                      +new_animal_id+","+owner_user_id+");" );
-        connection.query("INSERT INTO log_animal_user (animal_id, user_id) VALUES("
-                                                        +new_animal_id+","+owner_user_id+");"
+
+      connection.query("INSERT INTO log_animal_user (animal_id, user_id) VALUES("
+                            +new_animal_id+","+owner_user_id+");"
               ,function (err, result) {
                 if (err) throw err;
-              console.log(result.insertId);
               var new_record = req.body;
               new_record['id'] = result.insertId;
-              return res.send(new_record);
             });
-
-            var new_record = req.body;
-            new_record['id'] = result.insertId;
-            return res.send(new_record);
-
+      var new_record = req.body;
+      new_record['id'] = result.insertId;
+      return res.send(new_record);
       });
-
-
-
-
-
 });
 
 

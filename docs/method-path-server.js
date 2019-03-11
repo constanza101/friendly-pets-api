@@ -68,14 +68,25 @@ POST/animal
     --> req.body
       {
         "owner_user_id": 1,
-        "name": "Calu",
+        "name": "Frida",
         "animal_type_id": 1, //>>>> 1 = perro; 2 = gato
-        "birthdate": null,
+        "birthdate": "1999-12-31",
         "gender": "F",// F = female; M = male
-        "size": "large",
+        "size": "medium", //small, medium, large, extralarge
         "picture": "url",
         "description": "es una gatita bebe"
-        "id": 1
+      }
+  --> res.send(new_record):
+      {
+        "id": 27,
+        "owner_user_id": 1,
+        "name": "Frida",
+        "animal_type_id": 1,
+        "birthdate": "1999-12-31",
+        "gender": "F",
+        "size": "medium",
+        "picture": "www.google.com",
+        "description": "es una gatita bebe"
       }
 
 GET/animal/:id
