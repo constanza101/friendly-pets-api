@@ -369,7 +369,7 @@ Deletes single animal from data base, by its id.
 
   `DELETE`
 
-*  **URL Params** **(Required)**
+* **URL Params** **(Required)**
 
   `id=[integer]`
 

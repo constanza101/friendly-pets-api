@@ -35,8 +35,10 @@ DELETE/user/:id -> response_res.send("user deleted");
 
 
 
-------------------------------------------------------------------------------
+*******************************************************
 >> ANIMAL
+*******************************************************
+
 //NANIMAL register new.
 owner_user_id >> id
 id,
@@ -105,23 +107,75 @@ GET/animalsByStatus/:status
           ->returns all animalsByStatus: [{},{},{}]
 
 UPDATE/animal/:id
-              POST/city -> (1) -- {"id": 1,"name": "Barcelona"}
-              POST/address -> (2) -- {"id":address_id, "address": new_address,"postal_code": new_PC, "city_id": new_cityID }
-              -> (3)receives_req.body:
-              [
-  	           {"key":"status", "value":"lost"},
-               {"key":"picture", "value":"url2"},
-               {"key":"lost_address_id", "value":1},
-               {"key":"lost_date", "value": "2018-12-31"}
-              ]
-              ->returns "* FROM animal/:id"
+        POST/city -> (1) -- {"id": 1,"name": "Barcelona"}
+        POST/address -> (2) -- {"id":address_id, "address": new_address,"postal_code": new_PC, "city_id": new_cityID }
+        -> (3)receives_req.body:
+        [
+         {"key":"status", "value":"lost"},
+         {"key":"picture", "value":"url2"},
+         {"key":"lost_address_id", "value":1},
+         {"key":"lost_date", "value": "2018-12-31"}
+        ]
+        ->returns: "* FROM animal/:id"
 
 DELETE/animal/:id
 
 
+*******************************************************
+PLACES
+*******************************************************
 
+POST/place
+      -> recieves:
+      {
+      "name": "MarChalo",
+      "picture": "url2",
+      "description": "restaurante con terraza calefaccionada",
+      "address_id": 1
+      }
+      -> returns:
+      {
+      "id": 4,
+      "name": "MarChalo",
+      "picture": "url2",
+      "description": "restaurante con terraza calefaccionada",
+      "address_id": 1
+      }
 
+GET/place/:id
+    -> returns * from one place, by its id.
+    [{
+    "id": 3,
+    "name": "Marae",
+    "description": "restaurante con terraza calefaccionada",
+    "picture": "url2",
+    "address_id": 1
+    }]
 
+UPDATE/place/:id
+receives ->
+    [{"key":"name", "value":"Malbec Restaurante"},
+    {"key":"description", "value":"restaurante con terraza descubierta"}
+    ]
+returns all details of place updated ->
+    [{
+    "id": 1,
+    "name": "Malbec Restaurante",
+    "description": "restaurante con terraza descubierta",
+    "picture": "url2",
+    "address_id": 1
+    }]
+
+***********************************
+COMMENTS
+***********************************
+POST/comment
+{
+"comment":"name",
+"score": 5,
+"place_id":1,
+"user_id":1
+}
 
 
 

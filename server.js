@@ -236,7 +236,95 @@ app.get("/animals/:owner_user_id", function(req, res){
     });
 
 
+  //POST/place
+  app.post("/place", function(req, res){
+    var name = req.body.name;
+    var description = req.body.description;
+    var picture = req.body.picture;
+    var address_id = req.body.address_id;
 
+    connection.query("INSERT INTO place (name, description, picture, address_id) VALUES("
+              +"'"+name+"','"+description+"','"+picture+"',"+address_id+");"
+          ,function (err, data) {
+            var new_place_id = data.insertId
+            connection.query("SELECT * FROM place WHERE id =("+new_place_id+");"
+                  ,function (err, data) {
+                    if(err) throw err;
+                    return res.send(data);
+                    });
+    });
+  });
+
+
+
+  //GET/place/:id - GET ONE PLACE INFO
+  app.get("/place/:id", function(req, res){
+    var id = req.params.id;
+
+    connection.query("SELECT * FROM place WHERE id =("+id+");"
+      ,function (err, data) {
+        if(err) throw err;
+        return res.send(data);
+        });
+    });
+
+
+
+
+  //UPDATE/place/:id
+  app.put("/place/:id", function(req, res){
+    var id = req.params.id;
+    var new_value = req.body
+
+    for(var i= 0; i<new_value.length; i++){
+      connection.query("UPDATE place SET "+new_value[i]['key']+" = '"+new_value[i]['value']+"' WHERE id =("+id+");"
+        ,function (err, data) {
+          if(err) throw err;
+
+      })   //UPDATE
+    }  //for
+
+    connection.query("SELECT * FROM place WHERE id =("+id+");"
+      ,function (err, data) {
+          return res.send(data);
+        });//query select place by id
+  }); //app.put
+
+//DELETE/place/:id
+//TODO: From place/:id, GET the addres_id and then: DELETE FROM address WHERE id = address_id
+app.delete("/place/:id", function(req, res){
+  var id = req.params.id;
+  connection.query("DELETE FROM place WHERE id =("+id+");"
+    ,function (err, data) {
+      if(err) throw err;
+        return res.send("place deleted");
+      });
+  });
+
+  //POST/comment/:place_id
+  app.post("/comment", function(req, res){
+    var comment = req.body.comment;
+    var score = req.body.score;
+    var place_id = req.body.place_id;
+    var user_id = req.body.user_id;
+    console.log(req.body);
+    console.log(place_id);
+    console.log("INSERT INTO place_comment (comment, score, place_id, user_id) VALUES("
+              +"'"+comment+"',"+score+","+place_id+","+user_id+");");
+
+    connection.query("INSERT INTO place_comment (comment, score, place_id, user_id) VALUES("
+              +"'"+comment+"',"+score+","+place_id+","+user_id+");"
+          ,function (err, data) {
+            console.log(data);
+            var new_comment_id = data.insertId
+            connection.query("SELECT * FROM place_comment WHERE id =("+new_comment_id+");"
+                  ,function (err, data) {
+                    if(err) throw err;
+                    return res.send(data);
+                    });
+    });
+
+  });
 
 
 
