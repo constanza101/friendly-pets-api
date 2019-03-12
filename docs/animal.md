@@ -3,9 +3,9 @@
   * <a href="">Save New Animal</a>
   * <a href="">Show Animal (animal details)</a>
   * <a href="">List all animals of one owner</a>
-  * <a href="">List all animals of one owner</a>
-  * <a href="">Delete User (update profile)
-</a>
+  * <a href="">List all animals by status (lost / found / adoption)</a>
+  * <a href="">Update Animal (change details or update status)</a>
+    * <a href="">Delete Animal</a>
 
 
 **Save New Animal**
@@ -359,11 +359,11 @@ function getAnimalsByStatus(){
 
 **Delete Animal**
 ----
-Returns all new data of a single user.
+Deletes single animal from data base, by its id.
 
 * **URL**
 
-/user/:id
+  /animal/:id
 
 * **Method:**
 
@@ -377,8 +377,8 @@ Returns all new data of a single user.
 
 * **Success Response:**
 
-* **Code:** 200 <br />
-  **Content:** N/A
+* **Code:** 200 <br/>
+  **Content:** "eliminado"
 
 * **Error Response:** N/A
 
@@ -386,12 +386,12 @@ Returns all new data of a single user.
 * **Sample Call:**
 
 ```javascript
-function deleteUser(){
-    var url = "http://localhost:8000/user/11"
+function deleteAnimal(){
+    var url = "http://localhost:8000/animal/16"
     return $.ajax({
     url: url,
     type: 'DELETE',
-    success: function(response) {console.log("user deleted from database");},
+    success: function(response) {console.log("animal deleted from database", response);},
     });
 }
 ```

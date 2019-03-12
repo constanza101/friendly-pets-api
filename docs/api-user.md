@@ -163,7 +163,7 @@ Returns all new data of a single user.
 
 * **URL**
 
-/user/:id
+  /user/:id
 
 * **Method:**
 

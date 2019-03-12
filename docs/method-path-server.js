@@ -100,7 +100,9 @@ GET/animals/:owner_user_id --> (returns all the pets of one user) -> [{},{}]
 { "name": "Calu", "gender": "F", "size": "large", "picture": "www.google.com", "status": "default", "description": "es una gatita bebe"}
 ]
 
-
+GET/animalsByStatus/:status
+          status:lost/found/adption;
+          ->returns all animalsByStatus: [{},{},{}]
 
 UPDATE/animal/:id
               POST/city -> (1) -- {"id": 1,"name": "Barcelona"}
@@ -113,12 +115,6 @@ UPDATE/animal/:id
                {"key":"lost_date", "value": "2018-12-31"}
               ]
               ->returns "* FROM animal/:id"
-
-TODO: continuar la documentación desde acá
-
-GET/animalsByStatus/:status
-          status:lost/found/adption;
-          ->returns all animalsByStatus: [{},{},{}]
 
 DELETE/animal/:id
 

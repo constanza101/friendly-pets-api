@@ -228,7 +228,6 @@ app.get("/animals/:owner_user_id", function(req, res){
 //DELETE/animalById/:id - DELETE animal according its id
   app.delete("/animal/:id", function(req, res){
     var id = req.params.id;
-    console.log("DELETE FROM animal WHERE id =("+id+");");
    connection.query("DELETE FROM animal WHERE id =("+id+");"
           ,function (err, data) {
             if(err) throw err;
