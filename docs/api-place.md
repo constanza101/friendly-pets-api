@@ -156,12 +156,13 @@ Deletes single comment from data base, by its id.
 * **Sample Call:**
 
 ```javascript
-function deleteAnimal(){
+function deleteComment(){
     var url = "http://localhost:8000/comment/1"
     return $.ajax({
     url: url,
     type: 'DELETE',
-    success: function(response) {console.log("comment deleted from database", response);},
+    success: function(response) {
+      console.log("comment deleted from database", response);},
     });
 }
 ```
