@@ -192,7 +192,7 @@ GET/commentsByPlaceId/:place_id
   [
     {
         "id": 4,
-        "comment": "name",
+        "comment": "buenísima atención",
         "score": 5,
         "creation_date": "2019-03-12T14:22:04.000Z",
         "place_id": 1,
@@ -208,7 +208,7 @@ GET/commentsByPlaceId/:place_id
     }
 ]
 
-
+DELETE/comment/:id
 
 
 

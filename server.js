@@ -305,15 +305,10 @@ app.delete("/place/:id", function(req, res){
     var score = req.body.score;
     var place_id = req.body.place_id;
     var user_id = req.body.user_id;
-    console.log(req.body);
-    console.log(place_id);
-    console.log("INSERT INTO place_comment (comment, score, place_id, user_id) VALUES("
-              +"'"+comment+"',"+score+","+place_id+","+user_id+");");
 
     connection.query("INSERT INTO place_comment (comment, score, place_id, user_id) VALUES("
               +"'"+comment+"',"+score+","+place_id+","+user_id+");"
           ,function (err, data) {
-            console.log(data);
             var new_comment_id = data.insertId
             connection.query("SELECT * FROM place_comment WHERE id =("+new_comment_id+");"
                   ,function (err, data) {
@@ -321,7 +316,6 @@ app.delete("/place/:id", function(req, res){
                     return res.send(data);
                     });
     });
-
   });
 
 
@@ -346,15 +340,6 @@ app.delete("/place/:id", function(req, res){
               return res.send("comment deleted");
             });
         });
-
-
-
-
-
-
-
-
-
 
 
 
