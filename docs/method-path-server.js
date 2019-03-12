@@ -170,14 +170,43 @@ returns all details of place updated ->
 COMMENTS
 ***********************************
 POST/comment
-{
-"comment":"name",
-"score": 5,
-"place_id":1,
-"user_id":1
-}
+-> recieves:
+      {
+      "comment":"me gusta mucho este sitio",
+      "score": 5,
+      "place_id":1,
+      "user_id":1
+      }
+-> returns:
+      [{
+        "id": 4,
+        "comment": "me gusta mucho este sitio",
+        "score": 5,
+        "creation_date": "2019-03-12T14:22:04.000Z",
+        "place_id": 1,
+        "user_id": 1
+      }]
 
-
+GET/commentsByPlaceId/:place_id
+  -> returns all comments of one place:
+  [
+    {
+        "id": 4,
+        "comment": "name",
+        "score": 5,
+        "creation_date": "2019-03-12T14:22:04.000Z",
+        "place_id": 1,
+        "user_id": 1
+    },
+    {
+        "id": 5,
+        "comment": "me gusta mucho este sitio",
+        "score": 5,
+        "creation_date": "2019-03-12T14:30:14.000Z",
+        "place_id": 1,
+        "user_id": 1
+    }
+]
 
 
 

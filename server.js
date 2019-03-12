@@ -269,8 +269,6 @@ app.get("/animals/:owner_user_id", function(req, res){
     });
 
 
-
-
   //UPDATE/place/:id
   app.put("/place/:id", function(req, res){
     var id = req.params.id;
@@ -327,8 +325,27 @@ app.delete("/place/:id", function(req, res){
   });
 
 
+  //GET/commentByPlaceId/:place_id - GET list of comments according its place_id
+    app.get("/commentsByPlaceId/:place_id", function(req, res){
+      var place_id = req.params.place_id;
+      console.log(place_id);
+      connection.query("SELECT * FROM place_comment WHERE place_id =("+place_id+");"
+            ,function (err, data) {
+              if(err) throw err;
+              return res.send(data);
+              });
+      });
 
 
+      //DELETE/comment/:id
+      app.delete("/comment/:id", function(req, res){
+        var id = req.params.id;
+        connection.query("DELETE FROM place_comment WHERE id =("+id+");"
+          ,function (err, data) {
+            if(err) throw err;
+              return res.send("comment deleted");
+            });
+        });
 
 
 
