@@ -123,7 +123,7 @@ function getUserDetails(){
   `value` ->  type according to the key:<br>
     if key = name : `value =[string]`<br>
     if key = email :`value =[string]`<br>
-    if key = password : `password=[string]`<br>
+    if key = password : `value =[string]`<br>
     if key = address_id : `value =[integer]`
 
 
@@ -167,11 +167,11 @@ Returns all new data of a single user.
 
 * **Method:**
 
-`DELETE`
+  `DELETE`
 
 *  **URL Params** **(Required)**
 
-`id=[integer]`
+  `id=[integer]`
 
 * **Data Params**: N/A
 

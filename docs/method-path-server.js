@@ -101,6 +101,7 @@ GET/animals/:owner_user_id --> (returns all the pets of one user) -> [{},{}]
 ]
 
 
+
 UPDATE/animal/:id
               POST/city -> (1) -- {"id": 1,"name": "Barcelona"}
               POST/address -> (2) -- {"id":address_id, "address": new_address,"postal_code": new_PC, "city_id": new_cityID }
@@ -111,7 +112,9 @@ UPDATE/animal/:id
                {"key":"lost_address_id", "value":1},
                {"key":"lost_date", "value": "2018-12-31"}
               ]
-              ->returns "actualizado"
+              ->returns "* FROM animal/:id"
+
+TODO: continuar la documentación desde acá
 
 GET/animalsByStatus/:status
           status:lost/found/adption;

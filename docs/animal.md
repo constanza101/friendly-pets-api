@@ -1,8 +1,9 @@
 **Index:**
 ===
   * <a href="">Save New Animal</a>
-  * <a href="">Show User (user profile)</a>
-  * <a href="">Update User (update profile)</a>
+  * <a href="">Show Animal (animal details)</a>
+  * <a href="">List all animals of one owner</a>
+  * <a href="">List all animals of one owner</a>
   * <a href="">Delete User (update profile)
 </a>
 
@@ -44,6 +45,19 @@ Saves and returns all data of a single animal.(owner_id must come from an existi
     `picture=[string]`-> url <br>
     `description=[string]`<br>
 
+     **Optional or not required data:**<br>
+     These can be added later if needed or are automatically generated. <br>
+
+     `id=[integer]`-> automatically generated<br>
+     `status=[string]`-> default: can be updated to lost / found / adoption.<br>
+     `creation_date=[date]`-> automatically generated<br>
+     `lost_date=[string]`-> [YYY-MM-DD]<br>
+     `lost_address_id=[integer]` -> must first generate an address and use its id here <br>
+     `found_date=[string]`-> [YYY-MM-DD]<br>
+     `found_address_id=[integer]` -> must first generate an address and use its id here <br>
+     `animal_breed_id=[string]`-> we may later add a breed list.<br>
+
+
 * **Success Response:**
 
   * **Code:** 200 <br />
@@ -84,7 +98,7 @@ Saves and returns all data of a single animal.(owner_id must come from an existi
   }
 ```
 
-**Show Animal (animal detail)**
+**Show Animal (animal details)**
 ----
 Returns all data of a single animal.
 
@@ -144,7 +158,7 @@ function getAnimalDetails(){
 
 **List all animals of one owner**
 ----
-Returns all the pets of one user, by the owner_user_id.
+Returns a list with some details of all the pets of one user, by the owner_user_id.
 
 * **URL**
 
@@ -189,21 +203,84 @@ function getAnimalsByOwnerId(){
 ```
 
 
-
-
-
-
-
-
-
-
-**Update User (update profile)**
+**List all animals by status (lost / found / adoption)**
 ----
- Returns all new data of a single animal.
+Returns a list with some details of all the pets according to the status value (not all details).
 
 * **URL**
 
-  /user/:id
+/animalsByStatus/:status
+
+* **Method:**
+
+  `GET`
+
+*  **URL Params** **(Required)**
+
+  `status =[string]` -> lost / found / adoption
+
+* **Data Params**
+
+  None
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+  * **Content:**
+
+```
+[    
+    {
+        "name": "Frida",
+        "gender": "F",
+        "picture": "url2",
+        "status": "lost",
+        "description": "es una gatita LINDA",
+        "size": "medium",
+        "lost_date": "2018-12-30T23:00:00.000Z",
+        "found_date": null,
+        "lost_address_id": 1,
+        "found_address_id": null,
+        "birthdate": "1999-12-30T23:00:00.000Z"
+    },
+    {
+        "name": "Pepe",
+        "gender": "F",
+        "picture": "www.google.com",
+        "status": "lost",
+        "description": "es un perrito mediano",
+        "size": "medium",
+        "lost_date": null,
+        "found_date": null,
+        "lost_address_id": null,
+        "found_address_id": null,
+        "birthdate": "1999-12-30T23:00:00.000Z"
+    }
+]
+
+```
+
+* **Error Response:** N/A
+
+
+* **Sample Call:**
+
+```javascript
+function getAnimalsByStatus(){
+  var url = "http://localhost:8000/animalsByStatus/lost"
+  $.get(url, function(response) {
+      console.log(response);
+  });
+}
+```
+
+**Update Animal (change details or update status)**
+----
+ If the animal status needs to be changed from 'default' to 'lost' or 'found' it is necessary to first make a POST call to '/city' and '/address'.
+ For status 'adoption' we are not generating the address, we will use the owner's address if we need it (there is no adoption_address_id parameter though).
+
+* **URL**
+  /animal/:id
 
 * **Method:**
 
@@ -214,17 +291,19 @@ function getAnimalsByOwnerId(){
 * **Data Params**
 
   ```
-  [{"key":"email", "value":"hola@hotmail.com"},
-    {"key":"name", "value":"Jose"},
-    {"key":"address_id", "value":1}]
+  [
+   {"key":"status", "value":"lost"},
+   {"key":"picture", "value":"url2"},
+   {"key":"lost_address_id", "value":1},
+   {"key":"lost_date", "value": "2018-12-31"}
+  ]
   ```
 
   `key = [string]` -> must be exactly the key of what will be updated. <br>
   `value` ->  type according to the key:<br>
-    if key = name : `value =[string]`<br>
-    if key = email :`value =[string]`<br>
-    if key = password : `password=[string]`<br>
-    if key = address_id : `value =[integer]`
+    if key = status : `value =[string]` -> lost / found / adoption <br>
+    if key = lost_address_id or found_address_id :`value =[integer]`<br>
+    if key = lost_date or found_date : `value=[string]` -> [YYY-MM-DD]<br>
 
 
 * **Success Response:**
@@ -232,20 +311,41 @@ function getAnimalsByOwnerId(){
   * **Code:** 200 <br />
   * **Content:**
 
-    `[{"id": 1,"name": "Jose",  "email": "hola@hotmail.com",  "password": "7110eda4d09e062aa5e4a390b0a572ac0d2c0220",  "address_id": 1,  "creation_date": "2019-03-04T13:38:41.000Z"}]`
+        [{
+        "id": 12,
+        "name": "Frida",
+        "animal_type_id": 1,
+        "birthdate": null,
+        "gender": "F",
+        "size": "medium",
+        "picture": "url2",
+        "status": "lost",
+        "description": "es una gatita LINDA",
+        "creation_date": "2019-03-05T15:09:40.000Z",
+        "lost_date": "2018-12-30T23:00:00.000Z",
+        "lost_address_id": 1,
+        "found_date": null,
+        "found_address_id": null,
+        "owner_user_id": 1,
+        "animal_breed_id": null
+        }]
+
 
 * **Error Response:** N/A
 
 
 * **Sample Call:**
 
-  ```javascript
-  function updateUserDetails(){
+```javascript
+  function updateAnimalDetails(){
 
-      var url = "http://localhost:8000/user/10"
-      var data = [{"key":"email",     "value":"betito@hotmail.com"},
-        {"key":"name", "value":"Betito"},
-        {"key":"address_id", "value":1}]
+      var url = "http://localhost:8000/animal/10"
+      var data =   [
+         {"key":"status", "value":"lost"},
+         {"key":"picture", "value":"url2"},
+         {"key":"lost_address_id", "value":1},
+         {"key":"lost_date", "value": "2018-12-31"}
+        ]
 
       return $.ajax({
       url: url,
@@ -255,9 +355,9 @@ function getAnimalsByOwnerId(){
       contentType: "application/json"
       });
   }
-  ```
+```
 
-**Delete User (update profile)**
+**Delete Animal**
 ----
 Returns all new data of a single user.
 
@@ -267,11 +367,11 @@ Returns all new data of a single user.
 
 * **Method:**
 
-`DELETE`
+  `DELETE`
 
 *  **URL Params** **(Required)**
 
-`id=[integer]`
+  `id=[integer]`
 
 * **Data Params**: N/A
 

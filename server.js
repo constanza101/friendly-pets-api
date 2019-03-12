@@ -196,7 +196,7 @@ app.get("/animals/:owner_user_id", function(req, res){
 //GET/animalsByStatus/:status - GET list of animals according its status: (found, lost, adoption)
   app.get("/animalsByStatus/:status", function(req, res){
     var status = req.params.status;
-   connection.query("SELECT * FROM animal WHERE status =('"+status+"');"
+   connection.query("SELECT name, gender, picture, status, description, size, lost_date, found_date, lost_address_id, found_address_id, birthdate FROM animal WHERE status =('"+status+"');"
           ,function (err, data) {
             if(err) throw err;
             return res.send(data)
@@ -214,13 +214,18 @@ app.get("/animals/:owner_user_id", function(req, res){
       connection.query("UPDATE animal SET "+new_value[i]['key']+" = '"+new_value[i]['value']+"' WHERE id =("+id+");"
         ,function (err, data) {
           if(err) throw err;
-          res.send("actualizado");
+        // res.send("ERROR: " +err+ "DATA: " + data);
       })   //UPDATE
     }  //for
+    connection.query("SELECT * FROM animal WHERE id =("+id+");"
+      ,function (err, data) {
+          return res.send(data);
+        });//query select user by id
   }); //app.put
 
 
-//GET/animalById/:id - GET animal according its id
+
+//DELETE/animalById/:id - DELETE animal according its id
   app.delete("/animal/:id", function(req, res){
     var id = req.params.id;
     console.log("DELETE FROM animal WHERE id =("+id+");");
