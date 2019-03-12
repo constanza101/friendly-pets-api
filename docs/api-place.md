@@ -1,8 +1,8 @@
 **Index:**
 ===
-  * <a href="">Post comment</a>
-  * <a href="">List comments of one place</a>
-  * <a href="">Delete comment</a>
+  * <a href="https://github.com/constanza101/friendly-pets-api/blob/master/docs/api-place.md#post-comment">Post comment</a>
+  * <a href="https://github.com/constanza101/friendly-pets-api/blob/master/docs/api-place.md#list-all-comments-of-one-place">List comments of one place</a>
+  * <a href="https://github.com/constanza101/friendly-pets-api/blob/master/docs/api-place.md#delete-comment">Delete comment</a>
 
 **Post comment**
 ----
