@@ -1,11 +1,11 @@
 **Index:**
 ===
-  * <a href="">Save New Animal</a>
-  * <a href="">Show Animal (animal details)</a>
-  * <a href="">List all animals of one owner</a>
-  * <a href="">List all animals by status (lost / found / adoption)</a>
-  * <a href="">Update Animal (change details or update status)</a>
-    * <a href="">Delete Animal</a>
+  * <a href="https://github.com/constanza101/friendly-pets-api/blob/master/docs/animal.md#save-new-animal">Save New Animal</a>
+  * <a href="https://github.com/constanza101/friendly-pets-api/blob/master/docs/animal.md#show-animal-animal-details">Show Animal (animal details)</a>
+  * <a href="https://github.com/constanza101/friendly-pets-api/blob/master/docs/animal.md#list-all-animals-of-one-owner">List all animals of one owner</a>
+  * <a href="https://github.com/constanza101/friendly-pets-api/blob/master/docs/animal.md#list-all-animals-by-status-lost--found--adoption">List all animals by status (lost / found / adoption)</a>
+  * <a href="https://github.com/constanza101/friendly-pets-api/blob/master/docs/animal.md#update-animal-change-details-or-update-status">Update Animal (change details or update status)</a>
+  * <a href="https://github.com/constanza101/friendly-pets-api/blob/master/docs/animal.md#delete-animal">Delete Animal</a>
 
 
 **Save New Animal**
