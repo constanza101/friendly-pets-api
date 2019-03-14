@@ -84,6 +84,62 @@ fs.readFile( connectionData+".json", function (err, data) {
   });
 
 
+
+  //*******************************************************************
+
+  //post/user/:email
+  app.post("/userlogin", function(req, res){
+    var email = req.body.email;
+    var password = req.body.password;
+
+    console.log("hola".green);
+
+    connection.query("SELECT sha1("+password+")"
+          ,function (err, data) {
+            if(err) throw err;
+            var passToCheck = data[0]["sha1("+password+")"];
+
+            connection.query("SELECT id, email, password FROM user WHERE email =('"+email+"');"
+                  ,function (err, data) {
+                    var saved_email = data[0].email;
+                    var saved_pass = data[0].password;
+
+                    if(err) throw err;
+                    if (data.length < 1){
+                      console.log("este email no está registrado");
+                      return res.send("wrongEmail")
+                    } else if (passToCheck == saved_pass) {
+                      console.log("log in user");
+                      return res.send(data);
+                    } else{
+                      console.log("contraseña incorrecta".red)
+                      return res.send("wrongPass")
+                    }
+
+                    });
+
+
+
+
+            //return res.send(data);
+            });
+
+
+
+  });
+
+//*******************************************************************+
+
+
+
+
+
+
+
+
+
+
+
     //GET/user/:id - GET USER INFO FOR PROFILE
     app.get("/user/:id", function(req, res){
       var id = req.params.id;
@@ -118,7 +174,6 @@ fs.readFile( connectionData+".json", function (err, data) {
 
 
 //DELETE/user/:id
-//TODO: From user/:id, GET the addres_id and then: DELETE FROM address WHERE id = address_id
 app.delete("/user/:id", function(req, res){
   var id = req.params.id;
   connection.query("DELETE FROM user WHERE id =("+id+");"
@@ -214,7 +269,6 @@ app.get("/animals/:owner_user_id", function(req, res){
       connection.query("UPDATE animal SET "+new_value[i]['key']+" = '"+new_value[i]['value']+"' WHERE id =("+id+");"
         ,function (err, data) {
           if(err) throw err;
-        // res.send("ERROR: " +err+ "DATA: " + data);
       })   //UPDATE
     }  //for
     connection.query("SELECT * FROM animal WHERE id =("+id+");"
@@ -289,7 +343,6 @@ app.get("/animals/:owner_user_id", function(req, res){
   }); //app.put
 
 //DELETE/place/:id
-//TODO: From place/:id, GET the addres_id and then: DELETE FROM address WHERE id = address_id
 app.delete("/place/:id", function(req, res){
   var id = req.params.id;
   connection.query("DELETE FROM place WHERE id =("+id+");"
@@ -343,8 +396,11 @@ app.delete("/place/:id", function(req, res){
 
 
 
+
+
+
+
     app.listen(8000, function(){
       console.log("Server is listening in port 8000")
     })
-
 });
