@@ -31,6 +31,26 @@ UPDATE/user/:id
         "creation_date": "2019-03-04T13:38:41.000Z"
       }]
 
+POST/userlogin
+              -> receives:
+              {
+              "email":"sil@gmail.com",
+              "password": 1234
+              }
+              ->returns:
+              if email and password are correct:
+              [{
+              "id": 16,
+              "email": "sil@gmail.com",
+              "password": "7110eda4d09e062aa5e4a390b0a572ac0d2c0220"
+              }]
+              if email does not exist:
+              "wrongEmail";
+              if password does not match:
+              "wrongPass";
+
+
+
 DELETE/user/:id -> response_res.send("user deleted");
 
 

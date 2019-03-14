@@ -3,6 +3,7 @@
   * <a href="https://github.com/constanza101/friendly-pets-api/blob/master/docs/api-user.md#save-new-user-sign-up">Save New User (sign up)</a>
   * <a href="https://github.com/constanza101/friendly-pets-api/blob/master/docs/api-user.md#show-user-user-profile">Show User (user profile)</a>
   * <a href="https://github.com/constanza101/friendly-pets-api/blob/master/docs/api-user.md#update-user-update-profile">Update User (update profile)</a>
+  * <a href="">Log In User</a>
   * <a href="https://github.com/constanza101/friendly-pets-api/blob/master/docs/api-user.md#delete-user-update-profile">Delete User (update profile)
 </a>
 
@@ -156,6 +157,66 @@ function getUserDetails(){
       });
   }
   ```
+
+
+**Log In User**
+----
+Checks email exists in databas and password is correct.
+
+* **URL**
+
+  /userlogin
+
+* **Method:**
+
+  `POST`
+
+*  **URL Params** **(Not required)**
+
+
+* **Data Params**
+
+    {
+    "email":"sil@gmail.com",
+    "password": 1234
+    }
+
+    `email=[string]`<br>
+    `password=[string]`<br>
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+  * **Content:**
+    * if email not OK: "wrongEmail"
+    * if password not OK: "wrongPass"
+    * if email & password = OK: <br>
+    ```
+    [{
+        "id": 16,
+        "email": "sil@gmail.com",
+        "password": "7110eda4d09e062aa5e4a390b0a572ac0d2c0220"
+    }]
+    ```
+
+
+* **Error Response:** N/A
+
+
+* **Sample Call:**
+
+```javascript
+  function login(){
+  var data ={"email":"sil@gmail.com","password": "1234"}
+  var url = "http://localhost:8000/userlogin"
+
+    $.post(url, data, function(response) {
+        console.log(response);
+    });
+  }
+```
+
+
 
 **Delete User (update profile)**
 ----

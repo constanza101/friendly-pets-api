@@ -87,7 +87,7 @@ fs.readFile( connectionData+".json", function (err, data) {
 
   //*******************************************************************
 
-  //post/user/:email
+  //post/userlogin
   app.post("/userlogin", function(req, res){
     var email = req.body.email;
     var password = req.body.password;
