@@ -3,7 +3,7 @@
   * <a href="https://github.com/constanza101/friendly-pets-api/blob/master/docs/api-user.md#save-new-user-sign-up">Save New User (sign up)</a>
   * <a href="https://github.com/constanza101/friendly-pets-api/blob/master/docs/api-user.md#show-user-user-profile">Show User (user profile)</a>
   * <a href="https://github.com/constanza101/friendly-pets-api/blob/master/docs/api-user.md#update-user-update-profile">Update User (update profile)</a>
-  * <a href="">Log In User</a>
+  * <a href="https://github.com/constanza101/friendly-pets-api/blob/master/docs/api-user.md#log-in-user">Log In User</a>
   * <a href="https://github.com/constanza101/friendly-pets-api/blob/master/docs/api-user.md#delete-user-update-profile">Delete User (update profile)
 </a>
 
