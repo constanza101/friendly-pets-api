@@ -64,23 +64,65 @@ fs.readFile( connectionData+".json", function (err, data) {
         });
     });
 
+
+    //GET address/:id
+        app.get("/address/:id", function(req, res){
+          var id = req.params.id;
+
+          connection.query("SELECT * FROM address WHERE id =("+id+");"
+            ,function (err, data) {
+              if(err) throw err;
+              return res.send(data);
+              });
+          });
+
+      //GET city/:id
+          app.get("/city/:id", function(req, res){
+            var id = req.params.id;
+
+            connection.query("SELECT * FROM city WHERE id =("+id+");"
+              ,function (err, data) {
+                if(err) throw err;
+                return res.send(data);
+                });
+            });
+
+
+
+
   //POST/user
   app.post("/user", function(req, res){
     var new_name = req.body.name;
     var new_email = req.body.email;
     var new_password = req.body.password;
     var new_addressID = req.body.address_id;
-    connection.query("INSERT INTO user (name, email, password, address_id) VALUES("
-              +"'"+new_name+"','"+new_email+"',"+"SHA1("+"'"+new_password+"'"+")"+","+new_addressID+");"
-          ,function (err, data) {
-            var new_userID = data.insertId
-            console.log(data);
-            connection.query("SELECT * FROM user WHERE id =("+new_userID+");"
-                  ,function (err, data) {
-                    if(err) throw err;
-                    return res.send(data);
-                    });
-    });
+
+
+connection.query("SELECT COUNT(email) FROM user WHERE user.email = '"+new_email+"';"
+      ,function (err, data) {
+        //console.log(data);
+        //console.log(data[0]["COUNT(email)"]);
+        var didEmailExist = data[0]["COUNT(email)"]
+       if (didEmailExist < 1) {
+          connection.query("INSERT INTO user (name, email, password, address_id) VALUES("
+                    +"'"+new_name+"','"+new_email+"',"+"SHA1("+"'"+new_password+"'"+")"+","+new_addressID+");"
+                ,function (err, data) {
+                  var new_userID = data.insertId
+                  //console.log(data);
+                  connection.query("SELECT * FROM user WHERE id =("+new_userID+");"
+                        ,function (err, data) {
+                          if(err) throw err;
+                          return res.send(data);
+                          });
+          });//insert into user
+      }else{
+        return res.send("emailExistedInDB")}
+
+  });//select count
+
+
+
+
   });
 
 
@@ -92,29 +134,28 @@ fs.readFile( connectionData+".json", function (err, data) {
     var email = req.body.email;
     var password = req.body.password;
 
-    console.log("hola".green);
 
-    connection.query("SELECT sha1("+password+")"
+    connection.query("SELECT sha1('"+password+"')"
           ,function (err, data) {
             if(err) throw err;
-            var passToCheck = data[0]["sha1("+password+")"];
+            //console.log(data);
+
+            var passToCheck = data[0]["sha1('"+password+"')"];
 
             connection.query("SELECT id, email, password FROM user WHERE email =('"+email+"');"
                   ,function (err, data) {
-                    var saved_email = data[0].email;
-                    var saved_pass = data[0].password;
-
                     if(err) throw err;
-                    if (data.length < 1){
-                      console.log("este email no está registrado");
+
+
+                    if(data[0] == undefined){
                       return res.send("wrongEmail")
-                    } else if (passToCheck == saved_pass) {
-                      console.log("log in user");
-                      return res.send(data);
-                    } else{
-                      console.log("contraseña incorrecta".red)
-                      return res.send("wrongPass")
-                    }
+                    } else if (passToCheck == data[0].password) {
+                        console.log("contraseña correcta".green);
+                        return res.send(data);
+                        } else{
+                          console.log("contraseña incorrecta".red)
+                          return res.send("wrongPass")
+                      }
 
                     });
 

@@ -5,8 +5,11 @@ METHOD/path -> (posting order) -->
 
 -> response type
 -(if value = 1 -> value_type: number)
+
 *************************************************************
 >> USER
+*************************************************************
+
 //signup:
 *POST/city -> (1) -- {"id": 1,"name": "Barcelona"}
 *POST/address -> (2) -- {"id":address_id, "address": new_address,"postal_code": new_PC, "city_id": new_cityID }
