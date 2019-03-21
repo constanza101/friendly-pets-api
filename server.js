@@ -49,6 +49,19 @@ fs.readFile( connectionData+".json", function (err, data) {
     });
 
 
+//GET city/:id
+    app.get("/city/:id", function(req, res){
+      var id = req.params.id;
+
+      connection.query("SELECT * FROM city WHERE id =("+id+");"
+        ,function (err, data) {
+          if(err) throw err;
+          return res.send(data);
+          });
+      });
+
+
+
   //POST/address
   app.post("/address", function(req, res){
     var new_address = req.body.address;
@@ -76,16 +89,46 @@ fs.readFile( connectionData+".json", function (err, data) {
               });
           });
 
-      //GET city/:id
-          app.get("/city/:id", function(req, res){
-            var id = req.params.id;
 
-            connection.query("SELECT * FROM city WHERE id =("+id+");"
-              ,function (err, data) {
-                if(err) throw err;
-                return res.send(data);
-                });
-            });
+
+
+//UPDATE/address/:user_id
+
+  app.put("/user_address/:user_id", function(req, res){
+    var user_id = req.params.user_id;
+    var new_value = req.body;
+
+  //  console.log("req.body['key']: "+req.body[0]["key"]);
+
+//first get address_id from user, by user_id
+//console.log("SELECT address_id FROM user WHERE id =("+user_id+");");
+    connection.query("SELECT address_id FROM user WHERE id =("+user_id+");"
+      ,function (err, data) {
+       address_id = data[0]["address_id"];
+//console.log(data[0]["address_id"]);
+console.log("new_value[0]['key']"+new_value[0]['key']);
+console.log("new_value[0]['value']"+new_value[0]['value']);
+
+
+//UPDATE ADDRESS by address_id:
+    for(var i= 0; i<new_value.length; i++){
+    console.log("UPDATE address SET "+new_value[i]['key']+" = '"+new_value[i]['value']+"' WHERE id =("+address_id+");");
+
+      connection.query("UPDATE address SET "+new_value[i]['key']+" = '"+new_value[i]['value']+"' WHERE id =("+address_id+");"
+        ,function (err, data) {
+          if(err) throw err;
+      })   //UPDATE
+    }  //for
+    connection.query("SELECT * FROM address WHERE id =("+address_id+");"
+      ,function (err, data) {
+          return res.send(data);
+        });//query select user by id
+
+//return res.send(data);
+});
+
+  }); //app.put
+
 
 
 
@@ -225,6 +268,7 @@ app.delete("/user/:id", function(req, res){
   });
 
 
+//POST/animal
 app.post("/animal", function(req, res){
 //  var new_animal_id = data.insertId // se agrega solo al registrar el animal
   var owner_user_id = req.body.owner_user_id;
@@ -330,6 +374,14 @@ app.get("/animals/:owner_user_id", function(req, res){
             });
     });
 
+  //GET/places
+  app.get('/places', function(req, res){
+    connection.query('SELECT * FROM place', function(err, data){
+      if (err) throw err;
+      return res.send(data);
+    })
+  })
+
 
   //POST/place
   app.post("/place", function(req, res){
@@ -337,9 +389,11 @@ app.get("/animals/:owner_user_id", function(req, res){
     var description = req.body.description;
     var picture = req.body.picture;
     var address_id = req.body.address_id;
+    var latitude = req.body.latitude;
+    var longitude = req.body.longitude;
 
-    connection.query("INSERT INTO place (name, description, picture, address_id) VALUES("
-              +"'"+name+"','"+description+"','"+picture+"',"+address_id+");"
+    connection.query("INSERT INTO place (name, description, picture, address_id, latitude, longitude) VALUES("
+              +"'"+name+"','"+description+"','"+picture+"','"+address_id+"','"+latitude+"','"+longitude+"');"
           ,function (err, data) {
             var new_place_id = data.insertId
             connection.query("SELECT * FROM place WHERE id =("+new_place_id+");"
@@ -434,10 +488,6 @@ app.delete("/place/:id", function(req, res){
               return res.send("comment deleted");
             });
         });
-
-
-
-
 
 
 
