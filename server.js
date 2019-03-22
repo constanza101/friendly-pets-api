@@ -97,18 +97,10 @@ fs.readFile( connectionData+".json", function (err, data) {
   app.put("/user_address/:user_id", function(req, res){
     var user_id = req.params.user_id;
     var new_value = req.body;
-
-  //  console.log("req.body['key']: "+req.body[0]["key"]);
-
 //first get address_id from user, by user_id
-//console.log("SELECT address_id FROM user WHERE id =("+user_id+");");
     connection.query("SELECT address_id FROM user WHERE id =("+user_id+");"
       ,function (err, data) {
        address_id = data[0]["address_id"];
-//console.log(data[0]["address_id"]);
-console.log("new_value[0]['key']"+new_value[0]['key']);
-console.log("new_value[0]['value']"+new_value[0]['value']);
-
 
 //UPDATE ADDRESS by address_id:
     for(var i= 0; i<new_value.length; i++){
@@ -123,15 +115,22 @@ console.log("new_value[0]['value']"+new_value[0]['value']);
       ,function (err, data) {
           return res.send(data);
         });//query select user by id
-
-//return res.send(data);
-});
-
-  }); //app.put
+      });//query select address_id
+}); //app.put
 
 
+//DELETE/address/:user_id
+app.delete("/address/:id", function(req, res){
+  var id = req.params.id;
+  connection.query("DELETE FROM address WHERE id =("+id+");"
+    ,function (err, data) {
+      if(err) throw err;
+        return res.send("user deleted");
+      });
+  });
 
 
+  //*** END OF ADDRESS
 
   //POST/user
   app.post("/user", function(req, res){
@@ -160,19 +159,13 @@ connection.query("SELECT COUNT(email) FROM user WHERE user.email = '"+new_email+
           });//insert into user
       }else{
         return res.send("emailExistedInDB")}
-
   });//select count
+});
 
 
 
 
-  });
-
-
-
-  //*******************************************************************
-
-  //post/userlogin
+  //POST/userlogin
   app.post("/userlogin", function(req, res){
     var email = req.body.email;
     var password = req.body.password;
@@ -181,15 +174,11 @@ connection.query("SELECT COUNT(email) FROM user WHERE user.email = '"+new_email+
     connection.query("SELECT sha1('"+password+"')"
           ,function (err, data) {
             if(err) throw err;
-            //console.log(data);
-
             var passToCheck = data[0]["sha1('"+password+"')"];
 
             connection.query("SELECT id, email, password FROM user WHERE email =('"+email+"');"
                   ,function (err, data) {
                     if(err) throw err;
-
-
                     if(data[0] == undefined){
                       return res.send("wrongEmail")
                     } else if (passToCheck == data[0].password) {
@@ -199,35 +188,14 @@ connection.query("SELECT COUNT(email) FROM user WHERE user.email = '"+new_email+
                           console.log("contraseña incorrecta".red)
                           return res.send("wrongPass")
                       }
-
                     });
-
-
-
-
-            //return res.send(data);
             });
-
-
-
-  });
-
-//*******************************************************************+
-
-
-
-
-
-
-
-
-
+  });//post login
 
 
     //GET/user/:id - GET USER INFO FOR PROFILE
     app.get("/user/:id", function(req, res){
       var id = req.params.id;
-
       connection.query("SELECT * FROM user WHERE id =("+id+");"
         ,function (err, data) {
           if(err) throw err;
